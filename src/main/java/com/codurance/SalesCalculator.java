@@ -15,13 +15,14 @@ public class SalesCalculator {
 
     public void calculateSales(List<String> fileNames) {
         BufferedReader fileReader = null;
-        try {
-            List<Sale> sales = new ArrayList();
-            String line;
+        List<Sale> sales = new ArrayList();
 
-            for(String fileName : fileNames) {
+        for(String fileName : fileNames) {
+            try {
+                String line;
                 fileReader = new BufferedReader(new FileReader(fileName));
                 fileReader.readLine();
+
                 while ((line = fileReader.readLine()) != null) {
                     String[] salesEntryData = line.split(COMMA_DELIMITER);
                     if (salesEntryData.length > 0) {
@@ -29,26 +30,41 @@ public class SalesCalculator {
                         sales.add(salesEntry);
                     }
                 }
-            }
-
-            long totalSales = 0;
-
-            for (Sale salesEntry : sales) {
-                totalSales += salesEntry.price() * salesEntry.quanitySold();
-            }
-
-            System.out.println("Total sales revenue is £" + totalSales);
-        }
-        catch (IOException e) {
-            System.out.println("Error calculating sales");
-            e.printStackTrace();
-        } finally {
-            try {
-                fileReader.close();
             } catch (IOException e) {
-                System.out.println("Error while closing sales calculator");
+                System.out.println("Error calculating sales");
                 e.printStackTrace();
+            } finally {
+                try {
+                    fileReader.close();
+                } catch (IOException e) {
+                    System.out.println("Error while closing sales calculator");
+                    e.printStackTrace();
+                }
             }
         }
+
+        calculateTotalSalesRevenue(sales);
+        calculateTotalProductSales("chocolate", sales);
+        calculateTotalProductSales("apples", sales);
+        calculateTotalProductSales("beer", sales);
+    }
+
+    private void calculateTotalProductSales(String productName, List<Sale> sales) {
+        long productSalesRevenue = 0;
+        for(Sale sale : sales) {
+            if (sale.product().toLowerCase().equals(productName)) {
+                productSalesRevenue += sale.quanitySold() * sale.price();
+            }
+        }
+        System.out.println("Total sales of " + productName + ": £" + productSalesRevenue);
+    }
+
+    private void calculateTotalSalesRevenue(List<Sale> sales) {
+        long totalSales = 0;
+
+        for (Sale sale : sales) {
+            totalSales += sale.price() * sale.quanitySold();
+        }
+        System.out.println("Total sales revenue is £" + totalSales);
     }
 }

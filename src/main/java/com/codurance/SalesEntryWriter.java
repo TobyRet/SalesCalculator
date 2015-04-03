@@ -32,7 +32,6 @@ public class SalesEntryWriter {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            System.out.println("CSV file was created successfully");
             try {
                 fileWriter.close();
             } catch (IOException e) {
