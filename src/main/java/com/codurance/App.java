@@ -4,8 +4,7 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 
-public class App
-{
+public class App {
     public static void main( String[] args ) {
         Sale marchSalesEntry1 = new Sale("Chocolate", 2.20, 3);
         Sale marchSalesEntry2 = new Sale("Apples", 0.20, 15);
@@ -15,5 +14,8 @@ public class App
 
         SalesEntryWriter salesEntryWriter = new SalesEntryWriter();
         salesEntryWriter.writeCsvFile("MarchSales.csv", marchSales);
+
+        SalesCalculator salesCalculator = new SalesCalculator();
+        salesCalculator.calculateSales("MarchSales.csv");
     }
 }
