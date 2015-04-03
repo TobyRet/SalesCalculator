@@ -13,24 +13,27 @@ public class SalesCalculator {
     private static final int PRODUCT_PRICE = 1;
     private static final int QUANTITY_SOLD = 2;
 
-    public void calculateSales(String fileName) {
+    public void calculateSales(List<String> fileNames) {
         BufferedReader fileReader = null;
         try {
             List<Sale> sales = new ArrayList();
             String line;
-            fileReader = new BufferedReader(new FileReader(fileName));
-            fileReader.readLine();
-            while ((line = fileReader.readLine()) != null) {
-                String[] salesEntryData = line.split(COMMA_DELIMITER);
-                if (salesEntryData.length > 0) {
-                    Sale salesEntry = new Sale(salesEntryData[PRODUCT_NAME_INDEX], Double.valueOf(salesEntryData[PRODUCT_PRICE]), Integer.valueOf(salesEntryData[QUANTITY_SOLD]));
-                    sales.add(salesEntry);
+
+            for(String fileName : fileNames) {
+                fileReader = new BufferedReader(new FileReader(fileName));
+                fileReader.readLine();
+                while ((line = fileReader.readLine()) != null) {
+                    String[] salesEntryData = line.split(COMMA_DELIMITER);
+                    if (salesEntryData.length > 0) {
+                        Sale salesEntry = new Sale(salesEntryData[PRODUCT_NAME_INDEX], Double.valueOf(salesEntryData[PRODUCT_PRICE]), Integer.valueOf(salesEntryData[QUANTITY_SOLD]));
+                        sales.add(salesEntry);
+                    }
                 }
             }
 
             long totalSales = 0;
 
-            for(Sale salesEntry : sales) {
+            for (Sale salesEntry : sales) {
                 totalSales += salesEntry.price() * salesEntry.quanitySold();
             }
 
