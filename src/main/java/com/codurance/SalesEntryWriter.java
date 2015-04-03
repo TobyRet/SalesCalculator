@@ -4,22 +4,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-import static java.util.Arrays.asList;
-
-public class CsvFileWriter {
+public class SalesEntryWriter {
 
     private static final String COMMA_DELIMITER = ",";
     private static final String NEW_LINE_SEPARATOR = "\n";
 
     private static final String FILE_HEADER = "product, price, quantity sold";
 
-    public void writeCsvFile(String fileName) {
-        Sale salesEntry1 = new Sale("Chocolate", 2.20, 3);
-        Sale salesEntry2 = new Sale("Apples", 0.20, 15);
-        Sale salesEntry3 = new Sale("Beer", 3.00, 5);
-
-        List<Sale> sales = asList(salesEntry1, salesEntry2, salesEntry3);
-
+    public void writeCsvFile(String fileName, List<Sale> sales) {
         FileWriter fileWriter = null;
 
         try {
