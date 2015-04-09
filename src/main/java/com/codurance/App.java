@@ -6,7 +6,7 @@ import static java.util.Arrays.asList;
 
 public class App {
     public static void main( String[] args ) {
-        SalesEntryWriter salesEntryWriter = new SalesEntryWriter();
+        SalesEntryRecorder salesEntryRecorder = new SalesEntryRecorder();
 
         Sale marchSalesEntry1 = new Sale("Chocolate", 2, 3);
         Sale marchSalesEntry2 = new Sale("Apples", 0.20, 15);
@@ -24,9 +24,9 @@ public class App {
         List<Sale> aprilSales = asList(aprilSalesEntry1, aprilSalesEntry2, aprilSalesEntry3);
         List<Sale> juneSales = asList(juneSalesEntry1, juneSalesEntry2, juneSalesEntry3);
 
-        salesEntryWriter.writeCsvFile("MarchSales.csv", marchSales);
-        salesEntryWriter.writeCsvFile("AprilSales.csv", aprilSales);
-        salesEntryWriter.writeCsvFile("JuneSales.csv", juneSales);
+        salesEntryRecorder.writeCsvFile("MarchSales.csv", marchSales);
+        salesEntryRecorder.writeCsvFile("AprilSales.csv", aprilSales);
+        salesEntryRecorder.writeCsvFile("JuneSales.csv", juneSales);
 
         SalesCalculator salesCalculator = new SalesCalculator();
         List<String> sales = asList("MarchSales.csv", "AprilSales.csv", "JuneSales.csv");

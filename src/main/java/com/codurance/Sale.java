@@ -11,7 +11,7 @@ public class Sale {
         this.quanitySold = quantitySold;
     }
 
-    public String product() {
+    public String productName() {
         return product;
     }
 
