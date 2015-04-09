@@ -28,8 +28,9 @@ public class App {
         salesEntryRecorder.writeCsvFile("AprilSales.csv", aprilSales);
         salesEntryRecorder.writeCsvFile("JuneSales.csv", juneSales);
 
-        SalesCalculator salesCalculator = new SalesCalculator();
+        SalesPrinter salesPrinter = new SalesPrinter();
+        Calculator salesCalculator = new Calculator(salesPrinter);
         List<String> sales = asList("MarchSales.csv", "AprilSales.csv", "JuneSales.csv");
-        salesCalculator.calculateSales(sales);
+        salesCalculator.calculateSalesDataFor(sales);
     }
 }

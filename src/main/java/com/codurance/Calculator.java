@@ -8,15 +8,20 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class SalesCalculator {
+public class Calculator {
 
     private static final String COMMA_DELIMITER = ",";
     private static final int PRODUCT_NAME_INDEX = 0;
     private static final int PRODUCT_PRICE_INDEX = 1;
     private static final int QUANTITY_SOLD_INDEX = 2;
     private List<Sale> sales;
+    private SalesPrinter salesPrinter;
 
-    public void calculateSales(List<String> fileNames) {
+    public Calculator(SalesPrinter salesPrinter) {
+        this.salesPrinter = salesPrinter;
+    }
+
+    public void calculateSalesDataFor(List<String> fileNames) {
         readSalesEntries(fileNames);
         calculateTotalSalesRevenue(sales);
         calculateSalesRevenuePerProduct(sales);
@@ -68,7 +73,7 @@ public class SalesCalculator {
                 productSalesRevenue += sale.quanitySold() * sale.price();
             }
         }
-        System.out.println("Total sales of " + productName + ": £" + productSalesRevenue);
+        salesPrinter.print("Total sales of " + productName + ": £" + productSalesRevenue + "\n");
     }
 
     private void calculateTotalSalesRevenue(List<Sale> sales) {
@@ -77,7 +82,7 @@ public class SalesCalculator {
         for (Sale sale : sales) {
             totalSales += sale.price() * sale.quanitySold();
         }
-        System.out.println("Total sales revenue is £" + totalSales + "\n");
+        salesPrinter.print("Total sales revenue is £" + totalSales + "\n");
     }
 
     private Set<String> createUniqueProductNameList(List<Sale> sales) {
