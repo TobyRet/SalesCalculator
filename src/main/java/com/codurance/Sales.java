@@ -1,14 +1,14 @@
 package com.codurance;
 
-public class Sale {
+public class Sales {
     private final String product;
     private final double price;
-    private final int quanitySold;
+    private final int quantitySold;
 
-    public Sale(String product, double price, int quantitySold) {
+    public Sales(String product, double price, int quantitySold) {
         this.product = product;
         this.price = price;
-        this.quanitySold = quantitySold;
+        this.quantitySold = quantitySold;
     }
 
     public String productName() {
@@ -19,7 +19,7 @@ public class Sale {
         return price;
     }
 
-    public int quanitySold() {
-        return quanitySold;
+    public int quantitySold() {
+        return quantitySold;
     }
 }
