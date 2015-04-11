@@ -21,21 +21,21 @@ public class App {
     private static void createSalesEntries() {
         SalesEntryRecorder salesEntryRecorder = new SalesEntryRecorder();
 
-        Sale marchSalesEntry1 = new Sale("Chocolate", 2, 3);
-        Sale marchSalesEntry2 = new Sale("Apples", 0.20, 15);
-        Sale marchSalesEntry3 = new Sale("Beer", 3, 5);
+        Sales marchSalesEntry1 = new Sales("Chocolate", 2, 3);
+        Sales marchSalesEntry2 = new Sales("Apples", 0.20, 15);
+        Sales marchSalesEntry3 = new Sales("Beer", 3, 5);
 
-        Sale aprilSalesEntry1 = new Sale("Chocolate", 2, 4);
-        Sale aprilSalesEntry2 = new Sale("Apples", 0.20, 17);
-        Sale aprilSalesEntry3 = new Sale("Beer", 3, 8);
+        Sales aprilSalesEntry1 = new Sales("Chocolate", 2, 4);
+        Sales aprilSalesEntry2 = new Sales("Apples", 0.20, 17);
+        Sales aprilSalesEntry3 = new Sales("Beer", 3, 8);
 
-        Sale juneSalesEntry1 = new Sale("Chocolate", 2, 10);
-        Sale juneSalesEntry2 = new Sale("Apples", 0.20, 3);
-        Sale juneSalesEntry3 = new Sale("Beer", 3, 3);
+        Sales juneSalesEntry1 = new Sales("Chocolate", 2, 10);
+        Sales juneSalesEntry2 = new Sales("Apples", 0.20, 3);
+        Sales juneSalesEntry3 = new Sales("Beer", 3, 3);
 
-        List<Sale> marchSales = asList(marchSalesEntry1, marchSalesEntry2, marchSalesEntry3);
-        List<Sale> aprilSales = asList(aprilSalesEntry1, aprilSalesEntry2, aprilSalesEntry3);
-        List<Sale> juneSales = asList(juneSalesEntry1, juneSalesEntry2, juneSalesEntry3);
+        List<Sales> marchSales = asList(marchSalesEntry1, marchSalesEntry2, marchSalesEntry3);
+        List<Sales> aprilSales = asList(aprilSalesEntry1, aprilSalesEntry2, aprilSalesEntry3);
+        List<Sales> juneSales = asList(juneSalesEntry1, juneSalesEntry2, juneSalesEntry3);
 
         salesEntryRecorder.writeCsvFile(MARCH_SALES_CSV, marchSales);
         salesEntryRecorder.writeCsvFile(APRIL_SALES_CSV, aprilSales);

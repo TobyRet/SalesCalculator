@@ -28,9 +28,9 @@ public class CalculatorShould {
 
     @Test
     public void calculate_total_sales_revenue() {
-        String expectedTotalSales = "27";
-        String expectedChocolateSalesRevenue = "21";
-        String expectedApplesSalesRevenue = "6";
+        String expectedTotalSales = "27.00";
+        String expectedChocolateSalesRevenue = "21.00";
+        String expectedApplesSalesRevenue = "6.00";
 
         calculator.calculateSalesDataFor(salesEntries);
         verify(salesPrinter).print("Total sales revenue is £" + expectedTotalSales + "\n");
@@ -39,14 +39,14 @@ public class CalculatorShould {
     }
 
     private void createSalesEntries() {
-        Sale firstMonthSalesEntry1 = new Sale("Chocolate", 2, 3);
-        Sale firstMonthSalesEntry2 = new Sale("Apples", 0.20, 10);
+        Sales firstMonthSalesEntry1 = new Sales("Chocolate", 2, 3);
+        Sales firstMonthSalesEntry2 = new Sales("Apples", 0.20, 10);
 
-        Sale secondMonthSalesEntry1 = new Sale("Chocolate", 5, 3);
-        Sale secondMonthSalesEntry2 = new Sale("Apples", 0.20, 20);
+        Sales secondMonthSalesEntry1 = new Sales("Chocolate", 5, 3);
+        Sales secondMonthSalesEntry2 = new Sales("Apples", 0.20, 20);
 
-        List<Sale> firstMonthSales = asList(firstMonthSalesEntry1, firstMonthSalesEntry2);
-        List<Sale> secondMonthSales = asList(secondMonthSalesEntry1, secondMonthSalesEntry2);
+        List<Sales> firstMonthSales = asList(firstMonthSalesEntry1, firstMonthSalesEntry2);
+        List<Sales> secondMonthSales = asList(secondMonthSalesEntry1, secondMonthSalesEntry2);
 
         SalesEntryRecorder salesEntryRecorder = new SalesEntryRecorder();
 

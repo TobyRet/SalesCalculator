@@ -11,7 +11,7 @@ public class SalesEntryRecorder {
 
     private static final String FILE_HEADER = "productName, price, quantity sold";
 
-    public void writeCsvFile(String fileName, List<Sale> sales) {
+    public void writeCsvFile(String fileName, List<Sales> sales) {
         FileWriter fileWriter = null;
 
         try {
@@ -19,14 +19,14 @@ public class SalesEntryRecorder {
             fileWriter.append(FILE_HEADER.toString());
             fileWriter.append(NEW_LINE_SEPARATOR);
 
-            for (Sale salesEntry : sales) {
+            for (Sales salesEntry : sales) {
                 fileWriter.append(salesEntry.productName());
                 fileWriter.append(COMMA_DELIMITER);
 
                 fileWriter.append(String.valueOf(salesEntry.price()));
                 fileWriter.append(COMMA_DELIMITER);
 
-                fileWriter.append(String.valueOf(salesEntry.quanitySold()));
+                fileWriter.append(String.valueOf(salesEntry.quantitySold()));
                 fileWriter.append(NEW_LINE_SEPARATOR);
             }
         } catch (IOException e) {
