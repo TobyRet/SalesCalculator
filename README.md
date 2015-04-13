@@ -5,6 +5,6 @@ There are five csv files containing sales information. Each contains the item, p
 Write a programe that:
 
 1. Calculates the total sales revenue from all five files.
-2. Calculate the total sales revenue per product.
+2. Calculates the total sales revenue per product.
 
 

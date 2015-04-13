@@ -42,13 +42,11 @@ public class Calculator {
                     }
                 }
             } catch (IOException e) {
-                System.out.println("Error calculating sales");
                 e.printStackTrace();
             } finally {
                 try {
                     fileReader.close();
                 } catch (IOException e) {
-                    System.out.println("Error while closing sales calculator");
                     e.printStackTrace();
                 }
             }
