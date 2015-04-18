@@ -11,7 +11,17 @@ public class SalesEntryRecorder {
 
     private static final String FILE_HEADER = "productName, price, quantity sold";
 
-    public void writeCsvFile(String fileName, List<Sales> sales) {
+    private String fileName;
+
+    public SalesEntryRecorder(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public String fileName() {
+        return fileName;
+    }
+
+    public void writeToCSV(List<Sales> sales) {
         FileWriter fileWriter = null;
 
         try {

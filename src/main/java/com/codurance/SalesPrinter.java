@@ -1,27 +1,25 @@
 package com.codurance;
 
+import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class SalesPrinter {
-    private static final String SALES_REPORT = "./src/main/salesrevenuedata/Sales_Report.txt";
-    private FileWriter fileWriter = null;
+    private final String SALES_REPORT = "./src/main/salesrevenuedata/Sales_Report.txt";
 
-    public void print(String salesData) {
-
-        try {
-            fileWriter = new FileWriter(SALES_REPORT, true);
-            fileWriter.write(salesData);
-            }
-        catch (IOException e) {
+    public void printTotalSales(String totalSales) {
+        try(BufferedWriter fileWriter = new BufferedWriter(new FileWriter(SALES_REPORT))) {
+            fileWriter.write("Total sales: " + totalSales + "\n");
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        finally {
-            try {
-                fileWriter.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+    }
+
+    public void printProductSales(String product, String productRevenue) {
+        try(BufferedWriter fileWriter = new BufferedWriter(new FileWriter(SALES_REPORT))) {
+            fileWriter.write("Total product sales for " + product +": " + productRevenue + "\n");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

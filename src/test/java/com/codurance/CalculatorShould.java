@@ -13,44 +13,50 @@ import static org.mockito.Mockito.verify;
 @RunWith(MockitoJUnitRunner.class)
 public class CalculatorShould {
 
-    private static final String FIRST_MONTH_SALES_CSV = "./src/test/csvtestfiles/FirstMonthSales_Test.csv";
-    private static final String SECOND_MONTH_SALES_CSV = "./src/test/csvtestfiles/SecondMonthSales_Test.csv";
     @Mock SalesPrinter salesPrinter;
     private Calculator calculator;
-    private List<String> salesEntries;
 
     @Before
     public void setup() {
-        createSalesEntries();
         calculator = new Calculator(salesPrinter);
-        salesEntries = asList(FIRST_MONTH_SALES_CSV, SECOND_MONTH_SALES_CSV);
     }
 
     @Test
     public void calculate_total_sales_revenue() {
-        String expectedTotalSales = "27.00";
-        String expectedChocolateSalesRevenue = "21.00";
-        String expectedApplesSalesRevenue = "6.00";
+        SalesEntryRecorder marchSalesEntryRecorder = new SalesEntryRecorder("./src/test/csvtestfiles/salesentries/March_Sales.csv");
+        SalesEntryRecorder aprilSalesEntryRecorder = new SalesEntryRecorder("./src/test/csvtestfiles/salesentries/April_Sales.csv");
+        SalesEntryRecorder maySalesEntryRecorder = new SalesEntryRecorder("./src/test/csvtestfiles/salesentries/May_Sales.csv");
 
-        calculator.calculateSalesDataFor(salesEntries);
-        verify(salesPrinter).print("Total sales revenue is £" + expectedTotalSales + "\n");
-        verify(salesPrinter).print("Total sales of Chocolate: £" + expectedChocolateSalesRevenue + "\n");
-        verify(salesPrinter).print("Total sales of Apples: £" + expectedApplesSalesRevenue + "\n");
-    }
+        Sales marchSalesEntry1 = new Sales("Chocolate", 2, 5); // 10
+        Sales marchSalesEntry2 = new Sales("Apples", 0.20, 10); // 2
+        Sales marchSalesEntry3 = new Sales("Beer", 3, 5); //15
+                                        // 27
 
-    private void createSalesEntries() {
-        Sales firstMonthSalesEntry1 = new Sales("Chocolate", 2, 3);
-        Sales firstMonthSalesEntry2 = new Sales("Apples", 0.20, 10);
+        Sales aprilSalesEntry1 = new Sales("Chocolate", 2, 10); // 20
+        Sales aprilSalesEntry2 = new Sales("Apples", 0.20, 10); // 2
+        Sales aprilSalesEntry3 = new Sales("Beer", 3, 10); // 30
+                                        // 52
+        Sales maySalesEntry1 = new Sales("Chocolate", 2, 10); // 20
+        Sales maySalesEntry2 = new Sales("Apples", 0.20, 5); // 1
+        Sales maySalesEntry3 = new Sales("Beer", 3, 5); // 15
+                                                    // 36
 
-        Sales secondMonthSalesEntry1 = new Sales("Chocolate", 5, 3);
-        Sales secondMonthSalesEntry2 = new Sales("Apples", 0.20, 20);
+                                                    // 79 + 115
+        List<Sales> marchSales = asList(marchSalesEntry1, marchSalesEntry2, marchSalesEntry3);
+        List<Sales> aprilSales = asList(aprilSalesEntry1, aprilSalesEntry2, aprilSalesEntry3);
+        List<Sales> maySales = asList(maySalesEntry1, maySalesEntry2, maySalesEntry3);
 
-        List<Sales> firstMonthSales = asList(firstMonthSalesEntry1, firstMonthSalesEntry2);
-        List<Sales> secondMonthSales = asList(secondMonthSalesEntry1, secondMonthSalesEntry2);
+        marchSalesEntryRecorder.writeToCSV(marchSales);
+        aprilSalesEntryRecorder.writeToCSV(aprilSales);
+        maySalesEntryRecorder.writeToCSV(maySales);
 
-        SalesEntryRecorder salesEntryRecorder = new SalesEntryRecorder();
+        List<String> allSalesEntries = asList(marchSalesEntryRecorder.fileName(), aprilSalesEntryRecorder.fileName(), maySalesEntryRecorder.fileName());
 
-        salesEntryRecorder.writeCsvFile(FIRST_MONTH_SALES_CSV, firstMonthSales);
-        salesEntryRecorder.writeCsvFile(SECOND_MONTH_SALES_CSV, secondMonthSales);
+        calculator.createReportFor(allSalesEntries);
+
+        verify(salesPrinter).printTotalSales("115.00");
+        verify(salesPrinter).printProductSales("Chocolate", "50.00");
+        verify(salesPrinter).printProductSales("Apples", "5.00");
+        verify(salesPrinter).printProductSales("Beer", "60.00");
     }
 }
